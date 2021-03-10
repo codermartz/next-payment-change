@@ -44,9 +44,6 @@ class WC_Next_Payment_Change {
 	// Minimum WP version required to run this plugin
 	const WP_REQUIRED = '5.4';
 
-	// Text domain
-	const TEXT_DOMAIN = 'wc-next-payment-change';
-
 	// Static property of this class that will hold the singleton instance of this class
 	protected static $instance = null;
 
@@ -143,12 +140,12 @@ class WC_Next_Payment_Change {
 		// all of the advanced email address formatting out there. You can apply your own email validation logic here if you
 		// find that the "is_email" method is not enough.
 		if ( ! empty( $admin_email ) && is_email( $admin_email ) ) {
-			$subject = __( 'Next Payment Change', self::TEXT_DOMAIN );
+			$subject = __( 'Next Payment Change', 'wc-next-payment-change' );
 
 			// Build the email content based from the info provided.
-			$content = '<label>' . __( 'Order Number', self::TEXT_DOMAIN ) . '</label>' . $info[ 'order_number' ] . '<br />';
-			$content .= '<label>' . __( 'Product name', self::TEXT_DOMAIN ) . '</label>' . $info[ 'product_name' ] . '<br />';
-			$content .= '<label>' . __( 'Next payment date', self::TEXT_DOMAIN ) . '</label>' . $info[ 'next_payment_date' ] . '<br />';
+			$content = '<label>' . __( 'Order Number', 'wc-next-payment-change' ) . '</label>' . $info[ 'order_number' ] . '<br />';
+			$content .= '<label>' . __( 'Product name', 'wc-next-payment-change' ) . '</label>' . $info[ 'product_name' ] . '<br />';
+			$content .= '<label>' . __( 'Next payment date', 'wc-next-payment-change' ) . '</label>' . $info[ 'next_payment_date' ] . '<br />';
 
 			// Here, we're trying to change the content-type so that the recipient will receive a well-formatted HTML content
 			// instead of raw/plain text.
@@ -185,18 +182,18 @@ class WC_Next_Payment_Change {
 
 		if ( version_compare( PHP_VERSION, self::PHP_REQUIRED, '<' ) ) {
 			deactivate_plugins( WC_NEXT_PAYMENT_PLUGIN );
-			wp_die( __( $data['Name'] . ' requires PHP version ' . self::PHP_REQUIRED . ' or greater.', self::TEXT_DOMAIN ) );
+			wp_die( __( $data['Name'] . ' requires PHP version ' . self::PHP_REQUIRED . ' or greater.', 'wc-next-payment-change' ) );
 		}
 
 		include ABSPATH . WPINC . '/version.php';
 		if ( version_compare( $wp_version, self::WP_REQUIRED, '<' ) ) {
 			deactivate_plugins( WC_NEXT_PAYMENT_PLUGIN );
-			wp_die( __( $data['Name'] . ' requires WordPress version ' . self::WP_REQUIRED . ' or greater.', self::TEXT_DOMAIN ) );
+			wp_die( __( $data['Name'] . ' requires WordPress version ' . self::WP_REQUIRED . ' or greater.', 'wc-next-payment-change' ) );
 		}
 
 		if ( ! class_exists( 'WC_Subscriptions' ) ) {
 			deactivate_plugins( WC_NEXT_PAYMENT_PLUGIN );
-			wp_die( __( $data['Name'] . ' requires WooCommerce Subscriptions plugin.', self::TEXT_DOMAIN ) );
+			wp_die( __( $data['Name'] . ' requires WooCommerce Subscriptions plugin.', 'wc-next-payment-change' ) );
 		}
 	}
 
